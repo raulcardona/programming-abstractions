@@ -5,7 +5,7 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>19E28900-67EB-4FFB-95BF-3172D3C1769C</string>
+	<string>40292376-95FD-440F-B200-DA86EE499426</string>
 	<key>IDESourceControlProjectName</key>
 	<string>2_9</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
@@ -14,7 +14,7 @@
 		<string>https://github.com/floatingyuzu/programming-abstractions-in-cpp.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Chapter_2/Exercise_2_9 copy/2_10/2_9.xcodeproj/project.xcworkspace</string>
+	<string>Chapter_2/Exercise_2_9/2_9/2_9.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>1C55B894-3D69-46BF-AEA0-9737DFBCCA7C</key>
