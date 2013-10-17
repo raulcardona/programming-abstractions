@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>C29599F0-E222-45BA-8299-AEACFFF1179E</string>
+	<key>IDESourceControlProjectName</key>
+	<string>3_04</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>113DFAA2-956E-4D53-A6E5-82FC6E7C496E</key>
+		<string>https://github.com/floatingyuzu/programming-abstractions-in-cpp.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Chapter_3/Exersice_3_05/3_05/3_04.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>113DFAA2-956E-4D53-A6E5-82FC6E7C496E</key>
+		<string>../../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/floatingyuzu/programming-abstractions-in-cpp.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>113DFAA2-956E-4D53-A6E5-82FC6E7C496E</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>113DFAA2-956E-4D53-A6E5-82FC6E7C496E</string>
+			<key>IDESourceControlWCCName</key>
+			<string>programming-abstractions-in-cpp</string>
+		</dict>
+	</array>
+</dict>
+</plist>
