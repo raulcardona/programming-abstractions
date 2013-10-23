@@ -13,7 +13,6 @@
 #include <string>
 #include "random.h"
 
-using namespace std;
 
 /* Constants */
 
