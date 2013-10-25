@@ -3,6 +3,8 @@
  * -------------
  * Includes a function that copies characters from the input stream
  * to the output stream except for commented characters.
+ * Works except for "//" or "/*" that are not being used as comments 
+ * i.e. they are printed out etc.
  *
  */
 
@@ -77,9 +79,6 @@ void removeComments(std::istream &is, std::ostream &os) {
             }
             os << line << std::endl;
             
-        } else if (line.find("*/") != std::string::npos) {  // if the line contains a comment closer
-            line.erase(0, line.length() - line.find("*/") - 2);  // erase the line up to the closer
-            os << line << std::endl;
         } else {
             os << line << std::endl;
         }
