@@ -9,7 +9,6 @@
 #include <iostream>
 #include <string>
 #include "vector.h"
-#include "filelib.h"
 #include "strlib.h"
 
 
@@ -18,13 +17,15 @@ void readVector(std::istream &is, Vector<int> &vec);
 void readVector(std::istream &is, Vector<double> &vec);
 void readVector(std::istream &is, Vector<std::string> &vec);
 void printVector(Vector<double> &vec);
+std::string promptUserForFile(std::ifstream &inFile, std::string prompt);
+
 
 
 /* main */
 int main() {
-    std::ifstream inFile;
-    Vector<double> roots;
-    promptUserForFile(inFile);
+  std::ifstream inFile;
+  Vector<double> roots;
+    promptUserForFile(inFile, "Enter file name: ");
     readVector(inFile, roots);
     printVector(roots);
     readVector(inFile, roots);
@@ -36,6 +37,7 @@ int main() {
 }
 
 /* functions */
+
 void readVector(std::istream &is, Vector<int> &vec) {
     vec.clear();
     std::string line;
@@ -74,6 +76,20 @@ void printVector(Vector<double> &vec) {
         std::cout << vec[i];
     }
     std::cout << "]" << std::endl;
+}
+
+
+std::string promptUserForFile(std::ifstream &inFile, std::string prompt) {
+    while (true) {
+        std::cout << prompt;
+        std::string fileName;
+        getline(std::cin, fileName);
+        inFile.open(fileName.c_str());
+        if (!inFile.fail()) return fileName;
+        inFile.clear();
+        std::cout << "Unable to open that file. Try again." << std::endl;
+        if (prompt == "") prompt = "Input file: ";
+    }
 }
 
 
