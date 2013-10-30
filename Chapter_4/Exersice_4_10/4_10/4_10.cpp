@@ -2,16 +2,13 @@
  * File: 4_10.cpp
  * -------------
  * This program replaces tabs with the appropriate number of spaces.
- * At this point it just replaces every tab with 4 spaces
- * it doesn't account for tab areas that are less than 4.
+ * 
  */
 
+/* Imports */
 #include <iostream>
 #include <fstream>
 #include <string>
-
-/* Constants */
-
 
 /* Function Prototypes */
 std::string promptUserForFile(std::ifstream &inFile, std::string prompt);
@@ -59,16 +56,17 @@ std::string promptUserForFile(std::ofstream &outFile, std::string prompt) {
     }
 }
 
-void replaceTabs(std::ifstream &inFile, std::ofstream &outFile) {
+/* This function includes an optional tab size selecter, but defaults at 4 spaces */
+void replaceTabs(std::ifstream &inFile, std::ofstream &outFile, int numTab = 4) {
     char ch;
     int spaceCounter = 0;
     int sizeToTab = 0;
     while (inFile.get(ch)) {
         if (ch == '\n') spaceCounter = -1;
         if (spaceCounter < 0) {
-            sizeToTab = 4;
+            sizeToTab = numTab;
         } else {
-            sizeToTab = 4 - (spaceCounter % 4);
+            sizeToTab = numTab - (spaceCounter % numTab);
         }
         if (ch == '\t') {
             for (int i = 0; i < sizeToTab; i++) {
@@ -79,8 +77,8 @@ void replaceTabs(std::ifstream &inFile, std::ofstream &outFile) {
         } else {
             outFile.put(ch);
             std::cout << ch;
+            spaceCounter++;
         }
-        spaceCounter++;
     }
     
     
