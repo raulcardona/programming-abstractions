@@ -29,7 +29,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "66"
             endingLineNumber = "66"
-            landmarkName = "replaceTabs(std::ifstream &amp;inFile, std::ofstream &amp;outFile)"
+            landmarkName = "replaceTabs(std::ifstream &amp;inFile, std::ofstream &amp;outFile, int numTab = 4)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
