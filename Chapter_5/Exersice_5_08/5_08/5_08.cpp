@@ -24,7 +24,7 @@ int main() {
     
     Grid<int> matrix(3, 3);
     Vector<int> values;
-    values += 8, 1, 6;
+    values += 8, 1, 6, 5;
     values += 3, 5, 7;
     values += 4, 9, 2;
     fillGrid(matrix, values);
@@ -38,7 +38,6 @@ int main() {
         std::cout << std::endl;
     }
     
-    std::cout << std::endl;
     std::cout << std::endl;
     
     if (ismagicSquare(matrix)) {
@@ -92,7 +91,7 @@ bool ismagicSquare(Grid<int> &square) {
     int previousValue = magicNumber[0];
     for (int i = 0; i < magicNumber.size(); i++) {
         std::cout << magicNumber[i] << std::endl;
-        if (magicNumber[i] != 0 && magicNumber[i] != previousValue) {
+        if (magicNumber[i] != previousValue) {
             return false;
         }
     }
