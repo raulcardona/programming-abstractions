@@ -17,6 +17,7 @@
 #include "grid.h"
 
 
+
 /* Function Prototypes */
 bool checkSudokuSolution(Grid<int> &puzzle);
 bool checkRulesOnString(std::string str);
