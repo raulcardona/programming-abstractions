@@ -551,7 +551,7 @@ protected:
 
 /* Protected methods */
 
-   void createRoundRect(double width, double height, double corner);
+   void create(double width, double height, double corner);
 
 };
 
@@ -622,7 +622,7 @@ protected:
 
 /* Protected methods */
 
-   void create3DRect(double width, double height, bool raised);
+   void create(double width, double height, bool raised);
 
 };
 

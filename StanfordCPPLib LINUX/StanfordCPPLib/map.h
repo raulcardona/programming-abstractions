@@ -733,7 +733,7 @@ Map<KeyType,ValueType>::Map() {
 
 template <typename KeyType, typename ValueType>
 Map<KeyType,ValueType>::~Map() {
-//   if (cmpp != NULL) delete cmpp;
+   if (cmpp != NULL) delete cmpp;
    deleteTree(root);
 }
 
