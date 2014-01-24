@@ -1,4 +1,3 @@
-
 /*
  * File: 5_18.cpp
  * -------------
@@ -33,13 +32,29 @@ const int BALLS_PER_TRAP = 2;
 const int MIN_BALL_CYCLES = 1;
 const int MAX_BALL_CYCLES = 4;
 
+
 /*Function Prototypes*/
 
-void runSimulation();
-void printReport();
+void runSimulation(int &timeElapsed, int &numSprung, int &maxAirborne);
+void printReport(int timeElapsed, int numSprung, int maxAirborne);
 
 /*Main*/
 
 int main() {
+	
+	int timeElapsed = 0;
+	int numSprung = 0;
+	int maxAirborne = 0;
+
+	runSimulation(grid, timeElapsed, numSprung, maxAirborne);
+	printReport(timeElapsed, numSprung, maxAirborne);
+
+}
+
+void runSimulation(int &timeElapsed, int &numSprung, int &maxAirborne) {
+	Grid<bool>(GRID_SIZE, GRID_SIZE) grid;
+}
+
+void printReport(int timeElapsed, int numSprung, int maxAirborne) {
 
 }
