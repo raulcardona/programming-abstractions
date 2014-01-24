@@ -1,3 +1,11 @@
+
+/*
+ * File: 5_16.cpp
+ * -------------
+ * Simulates a Checkout line with multiple cashier lines.
+ *
+ */
+
 #include <iostream>
 #include <iomanip>
 #include "queue.h"

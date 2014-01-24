@@ -1,3 +1,11 @@
+
+/*
+ * File: 5_17.cpp
+ * -------------
+ * More Checkout line simulation - this time with one line served by 3 cashiers
+ *
+ */
+
 #include <iostream>
 #include <iomanip>
 #include "queue.h"
