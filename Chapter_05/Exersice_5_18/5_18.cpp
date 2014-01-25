@@ -61,12 +61,12 @@ void runSimulation(int &timeElapsed, int &numSprung, int &maxAirborne) {
         }
     }
     while (ballsInAir > 0) {
-        if (queue.peek() > 0) {
-           queue.enqueue(queue.dequeue() - 1); //This subtracts one and puts the ball back in the queue.
-        } else {
-            int currentX = randomInteger(0, GRID_SIZE);
-            int currnetY = randomInteger(0, GRID_SIZE);
-            if (grid.get(currentX, currnetY) > 0) {
+        if (queue.peek() > 0) { //Checking to see if the ball is still bouncing around the room.
+           queue.enqueue(queue.dequeue() - 1); //This subtracts one bounce cycle and puts the ball back in the queue.
+        } else { //The ball is done bouncing around the room.
+            int currentX = randomInteger(0, GRID_SIZE); // choosing where it will land
+            int currnetY = randomInteger(0, GRID_SIZE); //
+            if (grid.get(currentX, currnetY) > 0) { // As long as the square hasn't been set off before do this:
                 ballsInAir--;
                 grid.set(currentX, currnetY, 0);
                 queue.enqueue(randomInteger(MIN_BALL_CYCLES, MAX_BALL_CYCLES));
@@ -85,5 +85,8 @@ void runSimulation(int &timeElapsed, int &numSprung, int &maxAirborne) {
 }
 
 void printReport(int timeElapsed, int numSprung, int maxAirborne) {
-
+    cout << "---------- RESULTS --------------";
+    cout << "Max number of balls airborne: " << maxAirborne;
+    cout << "Percentage of traps sprung:   " << (GRID_SIZE * GRID_SIZE) / numSprung << "%";
+    cout << "Total time units elapsed:     " << timeElapsed;
 }
