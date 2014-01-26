@@ -55,8 +55,8 @@ void runSimulation(int &timeElapsed, int &numSprung, int &maxAirborne) {
     queue.enqueue(randomInteger(MIN_BALL_CYCLES, MAX_BALL_CYCLES));
     ballsInAir++;
     Grid<int> grid(GRID_SIZE, GRID_SIZE);
-    for (int i = 0, i < GRID_SIZE, i++) {
-        for (int j = 0, j < GRID_SIZE, j++) {
+    for (int i = 0; i < GRID_SIZE; i++) {
+        for (int j = 0; j < GRID_SIZE; j++) {
             grid.set(i, j, BALLS_PER_TRAP);
         }
     }
@@ -64,15 +64,15 @@ void runSimulation(int &timeElapsed, int &numSprung, int &maxAirborne) {
         if (queue.peek() > 0) { //Checking to see if the ball is still bouncing around the room.
            queue.enqueue(queue.dequeue() - 1); //This subtracts one bounce cycle and puts the ball back in the queue.
         } else { //The ball is done bouncing around the room.
-            int currentX = randomInteger(0, GRID_SIZE); // choosing where it will land
-            int currnetY = randomInteger(0, GRID_SIZE); //
+            int currentX = randomInteger(0, GRID_SIZE - 1); // choosing where it will land
+            int currnetY = randomInteger(0, GRID_SIZE - 1); //
             if (grid.get(currentX, currnetY) > 0) { // As long as the square hasn't been set off before do this:
                 ballsInAir--;
                 grid.set(currentX, currnetY, 0);
                 queue.enqueue(randomInteger(MIN_BALL_CYCLES, MAX_BALL_CYCLES));
                 queue.enqueue(randomInteger(MIN_BALL_CYCLES, MAX_BALL_CYCLES));
                 ballsInAir += 2;
-                numSprung += 2;
+                numSprung++; //add one to the count of traps sprung.
             } else {
                 ballsInAir--;
             }
@@ -85,8 +85,10 @@ void runSimulation(int &timeElapsed, int &numSprung, int &maxAirborne) {
 }
 
 void printReport(int timeElapsed, int numSprung, int maxAirborne) {
-    cout << "---------- RESULTS --------------";
-    cout << "Max number of balls airborne: " << maxAirborne;
-    cout << "Percentage of traps sprung:   " << (GRID_SIZE * GRID_SIZE) / numSprung << "%";
-    cout << "Total time units elapsed:     " << timeElapsed;
+    double totalGrid = (GRID_SIZE * GRID_SIZE);
+    double totalNumSprung = numSprung / totalGrid * 100.0;
+    cout << "---------- RESULTS --------------" << endl;
+    cout << "Max number of balls airborne: " << maxAirborne << endl;
+    cout << "Percentage of traps sprung:   " << totalNumSprung << "%" << endl;
+    cout << "Total time units elapsed:     " << timeElapsed << endl;
 }
