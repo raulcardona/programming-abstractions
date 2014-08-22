@@ -6,12 +6,12 @@
 using namespace std;
 
 
-int main() { 
+int main() {
 	for (Suit suit = CLUBS; suit <= SPADES; suit++) {
-		for (int rank = ACE; rank <= KING; rank++) { 
-			cout << " " << Card(rank, suit); 
+		for (int rank = ACE; rank <= KING; rank++) {
+			cout << " " << Card(rank, suit);
  		}
  		cout << endl;
 	}
 	return 0;
-} 		
+}
