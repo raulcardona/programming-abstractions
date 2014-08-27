@@ -27,6 +27,8 @@ public:
 
 	std::string toString();
 
+	friend Suit operator++(Suit &suit, int);
+
 private:
 
 	Suit suit;
@@ -36,5 +38,6 @@ private:
 
 /* Operator overloads */
 std::ostream &operator<<(std::ostream &os, Card car);
+Suit operator++(Suit &suit, int);
 
 #endif

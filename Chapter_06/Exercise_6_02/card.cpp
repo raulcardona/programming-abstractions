@@ -15,7 +15,7 @@ Card::Card() {
 }
 
 Card::Card(string str) {
-	/* TO DO */
+	/* parse the short string to get rank and suit */
 }
 
 Card::Card(int rk, Suit st) {
@@ -44,6 +44,13 @@ string Card::toString() {
 }
 
 /* Operator overloads */
+
+Suit operator++(Suit &suit, int) {
+	Suit old = suit;
+	suit = Suit(suit + 1);
+	return old;
+}
+
 ostream &operator<<(ostream &os, Card car) {
 	return os << car.toString();
 }

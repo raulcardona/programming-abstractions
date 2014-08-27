@@ -9,7 +9,7 @@
 #include <fstream>
 #include <string>
 #include "domino.h"
-#include "vector.h"
+#include <vector>
 
 using namespace std;
 
@@ -21,18 +21,18 @@ const int NUM_SIDES = 6;
 
 /* main */
 int main() {
-	Vector<Domino> dominoTiles;
+	vector<Domino> dominoTiles;
 	for (int i = 0; i <= NUM_SIDES; i++) {
 		for (int j = 0; j <= NUM_SIDES; j++) {
 			if (i <= j) {
 				Domino tile(i, j);
-				dominoTiles.add(tile);
+				dominoTiles.push_back(tile);
 			}
 		}
 	}
     int count = 0;
 	while (count < dominoTiles.size()) {
-		cout << dominoTiles.get(count) << endl;
+		cout << dominoTiles[count] << endl;
 		count++;
 	}
 
