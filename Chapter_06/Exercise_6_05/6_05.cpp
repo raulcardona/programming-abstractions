@@ -5,7 +5,7 @@ int main() {
 
 	Date moonLanding(JULY, 20, 1969);
 
-	cout << moonLanding.toString() << endl;
+	cout << moonLanding << endl;
 
 	return 0;
 }

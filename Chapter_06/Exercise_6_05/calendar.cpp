@@ -16,8 +16,11 @@ using namespace std;
 
 /* Function Prototypes */
 string monthToString(Month m);
+
 string abbreviateString(int numSpaces, string str);
+
 int daysInMonth(Month m, int y);
+
 bool isLeapYear(int y);
 
 Date::Date() {
