@@ -14,3 +14,5 @@ I was able to adjust the Linux makefile to build just the ones that would work o
 example build:
 
 g++ example.cpp -lStanfordCPPLib -L/Path/to/StanfordCPPLib/ -I/Path/to/StanfordCPPLib/ -o example
+
+Also the graphic libraries won't work on my iMac so most of these assignments are skipped.
