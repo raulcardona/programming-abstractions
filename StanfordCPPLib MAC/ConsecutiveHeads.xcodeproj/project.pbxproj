@@ -182,10 +182,11 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				LIBRARY_SEARCH_PATHS = StanfordCPPLib;
-				OTHER_CFLAGS = "-fstack-check";
-				SDKROOT = "";
+				OTHER_CFLAGS = "";
+				SDKROOT = macosx;
 				SYMROOT = /tmp/ConsecutiveHeads;
 				USER_HEADER_SEARCH_PATHS = StanfordCPPLib;
+				VALID_ARCHS = i386;
 				WARNING_CFLAGS = (
 					"-Wall",
 					"-Wno-sign-compare",
