@@ -6,7 +6,7 @@ int digitSum(int n);
 int digitalRoot(int n);
 
 int main() {
-	cout << digitalRoot(1853) << endl;
+	cout << digitalRoot(1729) << endl;
 
 	return 0;
 }
