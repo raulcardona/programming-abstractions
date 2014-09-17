@@ -1,9 +1,9 @@
 CC=g++
 CFLAGS=-c -Wall -I/Users/fuzzyllama/dev/lib/MyStanfordCPPLib
 LDFLAGS= -lStanfordCPPLib -L/Users/fuzzyllama/dev/lib/MyStanfordCPPLib -I/Users/fuzzyllama/dev/lib/MyStanfordCPPLib
-SOURCES=8_03.cpp
+SOURCES=8_04.cpp
 OBJECTS=$(SOURCES:.cpp=.o)
-EXECUTABLE=8_03
+EXECUTABLE=8_04
 
 all: $(SOURCES) $(EXECUTABLE)
 	
