@@ -8,7 +8,7 @@ using namespace std;
 
 int main() {
 
-	//Card testCard;
+	Card testCard;
 	for (Suit suit = CLUBS; suit <= SPADES; suit++) {
 		for (int rank = ACE; rank <= KING; rank++) {
 			cout << " " << Card(rank, suit);
