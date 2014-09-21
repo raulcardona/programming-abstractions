@@ -11,7 +11,6 @@ using namespace std;
 void fillVector(Vector<char> &vec, string str);
 bool hasWord(Vector<char> vec, string str);
 string eraseChar(string str, char ch);
-bool leftToRightOk(string line, string str);
 
 
 int main() {
@@ -58,14 +57,3 @@ string eraseChar(string str, char ch) {
 	}
 	
 }
-
-/*	bool subsetSumExists(Set<int> &set, int target) {
-		if (set.isEmpty() {
-			return target == 0;
-		} else {
-			int element = set.first();
-			Set<int> rest = set - element;
-			return subsetSumExists(rest, target) || subsetSumExists(rest, target - element);
-		}
-	}
-*/
