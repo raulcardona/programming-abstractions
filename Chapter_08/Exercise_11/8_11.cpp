@@ -7,6 +7,9 @@
 #include "vector.h"
 #include "set.h"
 #include "strlib.h"
+#include "lexicon.h"
+#include "simpio.h"
+#include "tokenscanner.h"
 
 using namespace std;
 
@@ -17,8 +20,18 @@ string generatePermutations(Vector<string> keyPresses, Vector<char> output, int 
 
 
 int main () {
-	cout << listMnemonics("26795") << endl;
-	return 0;
+	Lexicon dictionary("dictionary.txt"); 
+	string line = getLine("Enter Number: ");
+	cout << "The valid mnemonics are: " << endl;
+	string output = listMnemonics(line);
+	TokenScanner scanner(output);
+
+	while (scanner.hasMoreTokens()) {
+		string token = scanner.nextToken();
+		if (dictionary.contains(token)) {
+			cout << token << " ";
+		}
+	}
 }
 
 string listMnemonics(string str) {
