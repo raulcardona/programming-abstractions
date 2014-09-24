@@ -17,6 +17,8 @@ string listMnemonics(string str);
 void fillKeypad(Vector<string> &keypad);
 void fillKeyPresses(Vector<string> keypad, Vector<string> &keyPresses, string str);
 string generatePermutations(Vector<string> keyPresses, Vector<char> output, int index = 0);
+void listCompletions(string digits, Lexicon &lex);
+string findCompletions(Lexicon dictionary, Vector<string> completions, string str = "", int index = 0);
 
 
 int main () {
@@ -25,13 +27,45 @@ int main () {
 	cout << "The valid mnemonics are: " << endl;
 	string output = listMnemonics(line);
 	TokenScanner scanner(output);
-
+	Vector<string> completions;
 	while (scanner.hasMoreTokens()) {
 		string token = scanner.nextToken();
-		if (dictionary.contains(token)) {
-			cout << token << " ";
+		if (dictionary.contains(token) || dictionary.containsPrefix(token)) {
+			completions.add(token);
 		}
 	}
+	cout << completions << endl;
+	cout << "Calculating completions..." << endl;
+	cout << findCompletions(dictionary, completions);
+}
+
+
+string findCompletions(Lexicon dictionary, Vector<string> completions, string str, int index) {
+	string result;
+	if (index == completions.size() - 1) {
+		return result;
+	} 
+	if (str == ""){
+			str = completions[index];
+	} 
+	for (char i = 'A'; i <= 'Z'; i++) {
+		//cout << "CHAR: " << i << endl;
+		if (dictionary.contains(str)) {
+			result += str + " ";
+			cout << "Result: +" << result << endl;
+			str += i;
+		} 
+		if (dictionary.containsPrefix(str)) {
+			//cout << "Prefix: +" << str << endl;
+			findCompletions(dictionary, completions, str + i, index);
+		} 
+		if (i == 'Z') {
+			findCompletions(dictionary, completions, "", index + 1);
+		}
+	}
+}
+
+void listCompletions(string digits, Lexicon &lex) {
 }
 
 string listMnemonics(string str) {
@@ -72,13 +106,13 @@ void fillKeypad(Vector<string> &keypad) {
 	keypad.add("0"); // pos 0
 	keypad.add("1"); // pos 1
 	keypad.add("ABC"); // ABC begins at button "2" on a keypad
-	keypad.add("DEF"); // pos 3
-	keypad.add("GHI"); // pos 4
-	keypad.add("JKL"); // pos 5
-	keypad.add("MNO"); // pos 6
-	keypad.add("PQRS"); // pos 7
-	keypad.add("TUV"); // pos 8
-	keypad.add("WXYZ"); // pos 9
+	keypad.add("DEF");
+	keypad.add("GHI");
+	keypad.add("JKL");
+	keypad.add("MNO");
+	keypad.add("PQRS");
+	keypad.add("TUV");
+	keypad.add("WXYZ");
 }
 
 // Take strings from keypad and move them into keyPresses in order.
