@@ -209,10 +209,15 @@ private:
  * to carry their own comparators without forcing the client to include
  * the comparator in the template declaration.  This simplification is
  * particularly important for the Graph class.
+ *
+ * The allocation is required in the TemplateComparator class because
+ * the type std::binary_function has subclasses but does not define a
+ * virtual destructor.
  */
 
    class Comparator {
    public:
+      virtual ~Comparator() { }
       virtual bool lessThan(const KeyType & k1, const KeyType & k2) = 0;
       virtual Comparator *clone() = 0;
    };
@@ -221,19 +226,19 @@ private:
    class TemplateComparator : public Comparator {
    public:
       TemplateComparator(CompareType cmp) {
-         this->cmp = cmp;
+         this->cmp = new CompareType(cmp);
       }
 
       virtual bool lessThan(const KeyType & k1, const KeyType & k2) {
-         return cmp(k1, k2);
+         return (*cmp)(k1, k2);
       }
 
       virtual Comparator *clone() {
-         return new TemplateComparator<CompareType>(cmp);
+         return new TemplateComparator<CompareType>(*cmp);
       }
 
    private:
-      CompareType cmp;
+      CompareType *cmp;
    };
 
    Comparator & getComparator() const {

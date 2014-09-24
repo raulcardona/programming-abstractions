@@ -227,7 +227,7 @@ public:
  * writes that data in a form that scanNodeData can read.
  */
 
-   virtual void writeNodeData(std::ostream & os, NodeType *node) const {
+   virtual void writeNodeData(std::ostream &, NodeType *) const {
       /* Empty */
    }
 
@@ -241,7 +241,7 @@ public:
  * that data in a form that scanArcData can read.
  */
 
-   virtual void writeArcData(std::ostream & os, ArcType *arc) const {
+   virtual void writeArcData(std::ostream &, ArcType *) const {
       /* Empty */
    }
 
@@ -284,7 +284,7 @@ public:
  * other fields in the node from the token stream must override this method.
  */
 
-   virtual void scanNodeData(TokenScanner & scanner, NodeType *node) {
+   virtual void scanNodeData(TokenScanner &, NodeType *) {
       /* Empty */
    }
 
@@ -301,8 +301,8 @@ public:
  * that it initializes one or both arc, as appropriate.
  */
 
-   virtual void scanArcData(TokenScanner & scanner, ArcType *forward,
-                                                    ArcType *backward) {
+   virtual void scanArcData(TokenScanner & scanner, ArcType *,
+                                                    ArcType *) {
       /* Empty */
    }
 

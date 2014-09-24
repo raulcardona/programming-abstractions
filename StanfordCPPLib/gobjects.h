@@ -338,8 +338,8 @@ public:
 /* Private section */
 
 private:
-   const GObject & operator=(const GObject & src) { return *this; }
-   GObject(const GObject & src) { }
+   const GObject & operator=(const GObject &) { return *this; }
+   GObject(const GObject &) { }
 
 /* Instance variables */
 
@@ -499,7 +499,7 @@ protected:
 /* Protected methods */
 
    GRect();
-   virtual void create(double width, double height);
+   virtual void createGRect(double width, double height);
 
 };
 
@@ -551,7 +551,7 @@ protected:
 
 /* Protected methods */
 
-   void create(double width, double height, double corner);
+   void createGRoundRect(double width, double height, double corner);
 
 };
 
@@ -622,7 +622,7 @@ protected:
 
 /* Protected methods */
 
-   void create(double width, double height, bool raised);
+   void createG3DRect(double width, double height, bool raised);
 
 };
 
@@ -744,14 +744,14 @@ protected:
 
 /* Instance variables */
 
-   double width;           /* The width of the bounding oval          */
-   double height;          /* The height of the bounding oval         */
+   double width;           /* The width of the bounding rectangle     */
+   double height;          /* The height of the bounding rectangle    */
    bool fillFlag;          /* Indicates whether the object is filled  */
    std::string fillColor;  /* Color used to fill the object           */
 
 /* Protected methods */
 
-   void create(double width, double height);
+   void createGOval(double width, double height);
 
 };
 
@@ -944,7 +944,7 @@ private:
 
    GPoint getArcPoint(double theta) const;
    bool containsAngle(double theta) const;
-   void create(double width, double height, double start, double sweep);
+   void createGArc(double width, double height, double start, double sweep);
 
 /* Instance variables */
 
@@ -1107,7 +1107,7 @@ private:
    double width;
    double height;
 
-   void create(std::string filename);
+   void createGImage(std::string filename);
 
 };
 
@@ -1250,7 +1250,7 @@ private:
    double ascent;                  /* Font ascent                       */
    double descent;                 /* Font descent                      */
 
-   void create(const std::string & str);
+   void createGLabel(const std::string & str);
 
 };
 

@@ -2,10 +2,21 @@
 #****************************************************************
 
 OBJECTS = \
+    console.o \
     direction.o \
     error.o \
+    filelib.o \
+    gevents.o \
+    ginteractors.o \
+    gmath.o \
+    gobjects.o \
+    gtimer.o \
+    gtypes.o \
+    gwindow.o \
     hashmap.o \
     lexicon.o \
+    main.o \
+    platform.o \
     point.o \
     random.o \
     simpio.o \
@@ -13,8 +24,8 @@ OBJECTS = \
     startup.o \
     strlib.o \
     thread.o \
-    tokenscanner.o \
-    benfile.o
+    tplatform.o\
+    tokenscanner.o
 
 CPPOPTIONS = -fvisibility-inlines-hidden
 
@@ -101,10 +112,7 @@ tplatform.o: tplatform.cpp map.h private/tplatform.h
 	g++ -c $(CPPOPTIONS) tplatform.cpp
 
 tokenscanner.o: tokenscanner.cpp error.h stack.h strlib.h tokenscanner.h
-	g++ -c $(CPPOPTIONS) tokenscanner.cpp 
-benfile.o: benfile.cpp benfile.h
-	g++ -c $(CPPOPTIONS) benfile.cpp
-
+	g++ -c $(CPPOPTIONS) tokenscanner.cpp
 
 
 # ***************************************************************

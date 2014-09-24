@@ -163,11 +163,11 @@ GObject::~GObject() {
  */
 
 GRect::GRect(double width, double height) {
-   create(width, height);
+   createGRect(width, height);
 }
 
 GRect::GRect(double x, double y, double width, double height) {
-   create(width, height);
+   createGRect(width, height);
    setLocation(x, y);
 }
 
@@ -242,7 +242,7 @@ GRect::GRect() {
    /* Called only by the GRoundRect and G3DRect subclasses */
 }
 
-void GRect::create(double width, double height) {
+void GRect::createGRect(double width, double height) {
    this->x = 0;
    this->y = 0;
    this->width = width;
@@ -259,21 +259,21 @@ void GRect::create(double width, double height) {
  */
 
 GRoundRect::GRoundRect(double width, double height) {
-   create(width, height, DEFAULT_CORNER);
+   createGRoundRect(width, height, DEFAULT_CORNER);
 }
 
 GRoundRect::GRoundRect(double width, double height, double corner) {
-   create(width, height, corner);
+   createGRoundRect(width, height, corner);
 }
 
 GRoundRect::GRoundRect(double x, double y, double width, double height) {
-   create(width, height, DEFAULT_CORNER);
+   createGRoundRect(width, height, DEFAULT_CORNER);
    setLocation(x, y);
 }
 
 GRoundRect::GRoundRect(double x, double y, double width, double height,
                        double corner) {
-   create(width, height, corner);
+   createGRoundRect(width, height, corner);
    setLocation(x, y);
 }
 
@@ -292,7 +292,7 @@ string GRoundRect::toString() const {
    return oss.str();
 }
 
-void GRoundRect::create(double width, double height, double corner) {
+void GRoundRect::createGRoundRect(double width, double height, double corner) {
    this->x = 0;
    this->y = 0;
    this->width = width;
@@ -310,21 +310,21 @@ void GRoundRect::create(double width, double height, double corner) {
  */
 
 G3DRect::G3DRect(double width, double height) {
-   create(width, height, false);
+   createG3DRect(width, height, false);
 }
 
 G3DRect::G3DRect(double width, double height, bool raised) {
-   create(width, height, raised);
+   createG3DRect(width, height, raised);
 }
 
 G3DRect::G3DRect(double x, double y, double width, double height) {
-   create(width, height, false);
+   createG3DRect(width, height, false);
    setLocation(x, y);
 }
 
 G3DRect::G3DRect(double x, double y, double width, double height,
                            bool raised) {
-   create(width, height, raised);
+   createG3DRect(width, height, raised);
    setLocation(x, y);
 }
 
@@ -352,7 +352,7 @@ string G3DRect::toString() const {
    return oss.str();
 }
 
-void G3DRect::create(double width, double height, bool raised) {
+void G3DRect::createG3DRect(double width, double height, bool raised) {
    this->x = 0;
    this->y = 0;
    this->width = width;
@@ -364,11 +364,11 @@ void G3DRect::create(double width, double height, bool raised) {
 }
 
 GOval::GOval(double width, double height) {
-   create(width, height);
+   createGOval(width, height);
 }
 
 GOval::GOval(double x, double y, double width, double height) {
-   create(width, height);
+   createGOval(width, height);
    setLocation(x, y);
 }
 
@@ -449,7 +449,7 @@ string GOval::toString() const {
    return oss.str();
 }
 
-void GOval::create(double width, double height) {
+void GOval::createGOval(double width, double height) {
    this->x = 0;
    this->y = 0;
    this->width = width;
@@ -459,19 +459,15 @@ void GOval::create(double width, double height) {
    pp->createGOval(this, width, height);
 }
 
-/*
- * Implementation notes: G3DRect class
- * -----------------------------------
- * Most of the G3DRect class is inherited from the GRect class.
- */
+/* GArc class */
 
 GArc::GArc(double width, double height, double start, double sweep) {
-   create(width, height, start, sweep);
+   createGArc(width, height, start, sweep);
 }
 
 GArc::GArc(double x, double y, double width, double height,
                                double start, double sweep) {
-   create(width, height, start, sweep);
+   createGArc(width, height, start, sweep);
    setLocation(x, y);
 }
 
@@ -623,7 +619,7 @@ bool GArc::containsAngle(double theta) const {
    }
 }
 
-void GArc::create(double width, double height, double start, double sweep) {
+void GArc::createGArc(double width, double height, double start, double sweep) {
    this->x = 0;
    this->y = 0;
    frameWidth = width;
@@ -757,11 +753,11 @@ void GCompound::removeAt(int index) {
 }
 
 GImage::GImage(string filename) {
-   create(filename);
+   createGImage(filename);
 }
 
 GImage::GImage(string filename, double x, double y) {
-   create(filename);
+   createGImage(filename);
    setLocation(x, y);
 }
 
@@ -778,7 +774,7 @@ string GImage::toString() const {
    return "GImage(\"" + filename + "\")";
 }
 
-void GImage::create(string filename) {
+void GImage::createGImage(string filename) {
    this->filename = filename;
    GDimension size = pp->createGImage(this, filename);
    width = size.getWidth();
@@ -791,15 +787,15 @@ void GImage::create(string filename) {
  */
 
 GLabel::GLabel(string str) {
-   create(str);
+   createGLabel(str);
 }
 
 GLabel::GLabel(string str, double x, double y) {
-   create(str);
+   createGLabel(str);
    setLocation(x, y);
 }
 
-void GLabel::create(const string & str) {
+void GLabel::createGLabel(const string & str) {
    this->str = str;
    pp->createGLabel(this, str);
    setFont(DEFAULT_GLABEL_FONT);

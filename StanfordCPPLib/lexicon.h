@@ -184,6 +184,7 @@ private:
 #define BYTE_ORDER LITTLE_ENDIAN
 #endif
 
+#pragma pack(1)
    struct Edge {
 #if defined(BYTE_ORDER) && BYTE_ORDER == LITTLE_ENDIAN
       unsigned long letter:5;
@@ -199,6 +200,7 @@ private:
       unsigned long letter:5;
 #endif
    };
+#pragma pack()
 
    Edge *edges, *start;
    int numEdges, numDawgWords;

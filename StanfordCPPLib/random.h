@@ -16,7 +16,7 @@
  */
 
 int randomInteger(int low, int high);
-d
+
 /*
  * Function: randomReal
  * Usage: double d = randomReal(low, high);

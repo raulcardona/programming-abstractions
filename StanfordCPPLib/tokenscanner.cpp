@@ -168,7 +168,7 @@ TokenType TokenScanner::getTokenType(string token) const {
    if (token == "") return TokenType(EOF);
    char ch = token[0];
    if (isspace(ch)) return SEPARATOR;
-   if (ch == '"' || ch == '\'' && token.length() > 1) return STRING;
+   if (ch == '"' || (ch == '\'' && token.length() > 1)) return STRING;
    if (isdigit(ch)) return NUMBER;
    if (isWordCharacter(ch)) return WORD;
    return OPERATOR;
@@ -233,7 +233,7 @@ int TokenScanner::getChar() {
    return isp->get();
 }
 
-void TokenScanner::ungetChar(int ch) {
+void TokenScanner::ungetChar(int) {
    isp->unget();
 }
 
@@ -301,7 +301,6 @@ string TokenScanner::scanNumber() {
    NumberScannerState state = INITIAL_STATE;
    while (state != FINAL_STATE) {
       int ch = isp->get();
-      int xch = 'e';
       switch (state) {
        case INITIAL_STATE:
          if (!isdigit(ch)) {
@@ -314,7 +313,6 @@ string TokenScanner::scanNumber() {
             state = AFTER_DECIMAL_POINT;
          } else if (ch == 'E' || ch == 'e') {
             state = STARTING_EXPONENT;
-            xch = ch;
          } else if (!isdigit(ch)) {
             if (ch != EOF) isp->unget();
             state = FINAL_STATE;
@@ -323,7 +321,6 @@ string TokenScanner::scanNumber() {
        case AFTER_DECIMAL_POINT:
          if (ch == 'E' || ch == 'e') {
             state = STARTING_EXPONENT;
-            xch = ch;
          } else if (!isdigit(ch)) {
             if (ch != EOF) isp->unget();
             state = FINAL_STATE;

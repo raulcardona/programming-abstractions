@@ -22,6 +22,7 @@
 #include <algorithm>
 #include <cstdlib>
 #include <iostream>
+#include <stdint.h>
 #include "error.h"
 #include "lexicon.h"
 #include "strlib.h"
@@ -61,11 +62,11 @@ Lexicon::~Lexicon() {
  * Swaps a 4-byte long from big to little endian byte order
  */
 
-static unsigned long my_ntohl(unsigned long arg) {
-   unsigned long result = ((arg & 0xff000000) >> 24) |
-                          ((arg & 0x00ff0000) >> 8) |
-                          ((arg & 0x0000ff00) << 8) |
-                          ((arg & 0x000000ff) << 24);
+static uint32_t my_ntohl(uint32_t arg) {
+   uint32_t result = ((arg & 0xff000000) >> 24) |
+                     ((arg & 0x00ff0000) >> 8) |
+                     ((arg & 0x0000ff00) << 8) |
+                     ((arg & 0x000000ff) << 24);
    return result;
 }
 
@@ -103,7 +104,7 @@ void Lexicon::readBinaryFile(string filename) {
    }
 
 #if defined(BYTE_ORDER) && BYTE_ORDER == LITTLE_ENDIAN
-   unsigned long *cur = (unsigned long *) edges;
+   uint32_t *cur = (uint32_t *) edges;
    for (int i = 0; i < numEdges; i++, cur++) {
       *cur = my_ntohl(*cur);
    }

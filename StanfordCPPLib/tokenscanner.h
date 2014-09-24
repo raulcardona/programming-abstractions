@@ -19,6 +19,11 @@
  * <code>getTokenType</code> method.
  */
 
+#ifdef _WIN32
+#  define TokenType TokenTypeT
+#  define WORD WORD_TC
+#endif
+
 enum TokenType { SEPARATOR, WORD, NUMBER, STRING, OPERATOR };
 
 /*

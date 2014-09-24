@@ -5,22 +5,23 @@
  * a Java back end that manages the display.
  */
 
-#ifdef _MSC_VER
+#ifdef _WIN32
 #  include <windows.h>
 #  include <tchar.h>
 #  undef MOUSE_EVENT
 #  undef KEY_EVENT
 #  undef MOUSE_MOVED
 #  undef HELP_KEY
-#endif
-
-#if defined(__unix__) || defined(__STDC_HOSTED__)
+#else
 #  include <sys/types.h>
 #  include <sys/stat.h>
 #  include <dirent.h>
 #  include <errno.h>
 #  include <pwd.h>
 #  include <unistd.h>
+static bool tracePipe;
+static int pin;
+static int pout;
 #endif
 
 #include <algorithm>
@@ -126,13 +127,12 @@ static Queue<GEvent> eventQueue;
 static HashMap<string,GTimerData *> timerTable;
 static HashMap<string,GWindowData *> windowTable;
 static HashMap<string,GObject *> sourceTable;
+static HashMap<string,string> optionTable;   
 static string programName;
 static ofstream logfile;
-static bool tracePipe;
-static int pin;
-static int pout;
 
-#ifdef _MSC_VER
+
+#ifdef _WIN32
 static HANDLE rdFromJBE = NULL;
 static HANDLE wrFromJBE = NULL;
 static HANDLE rdToJBE = NULL;
@@ -165,7 +165,7 @@ Platform::~Platform() {
 
 /* Unix implementations of filelib.h primitives */
 
-#if defined(__unix__) || defined(__STDC_HOSTED__)
+#ifndef _WIN32
 
 bool Platform::fileExists(string filename) {
    struct stat fileInfo;
@@ -271,11 +271,7 @@ void Platform::listDirectory(string path, vector<string> & list) {
    sort(list.begin(), list.end());
 }
 
-#endif
-
-/* Windows implementations of filelib.h primitives */
-
-#ifdef _MSC_VER
+#else
 
 bool Platform::fileExists(string filename) {
    return GetFileAttributesA(filename.c_str()) != INVALID_FILE_ATTRIBUTES;
@@ -407,7 +403,7 @@ void Platform::repaint(const GWindow & gw) {
    putPipe(os.str());
 }
 
-void Platform::setVisible(const GWindow & gw, bool flag) {
+void Platform::setVisible(const GWindow&, bool) {
 //   ostringstream os;
 //   os << boolalpha << "GWindow.setVisible(\"" << gw.gwd << "\", "
 //                   << flag << ")";
@@ -946,8 +942,8 @@ Platform *getPlatform() {
    static Platform gp;
    return &gp;
 }
-
-#ifdef _MSC_VER
+   
+#ifdef _WIN32
 
 /* Windows implementation of interface to Java back end */
 
@@ -995,7 +991,7 @@ static void initPipe() {
    sInfo.hStdInput = rdToJBE;
    sInfo.hStdOutput = wrFromJBE;
    sInfo.hStdError = wrFromJBE;
-   int ok = CreateProcessA(NULL, cmdLine, NULL, NULL, true, 0,
+   int ok = CreateProcessA(NULL, cmdLine, NULL, NULL, true, CREATE_NO_WINDOW,
                            NULL, NULL, &sInfo, &pInfo);
    if (!ok) {
       DWORD err = GetLastError();
@@ -1029,6 +1025,32 @@ static string getPipe() {
 
 /* Linux/Mac implementation of interface to Java back end */
 
+static void scanOptions() {
+   char *home = getenv("HOME");
+   if (home != NULL) {
+      string filename = string() + home + "/.spl";
+      ifstream infile(filename.c_str());
+      if (!infile.fail()) {
+         string line;
+         while (getline(infile, line)) {
+            size_t equals = line.find('=');
+            if (equals != string::npos) {
+               string key = line.substr(0, equals);
+               string value = line.substr(equals + 1);
+               optionTable.put(key, value);
+            }
+         }
+         infile.close();
+      }
+   }
+}
+
+static string getOption(string key) {
+   char *str = getenv(key.c_str());
+   if (str != NULL) return string(str);
+   return optionTable.get(key);
+}
+
 int startupMain(int argc, char **argv) {
    extern int Main(int argc, char **argv);
    string arg0 = argv[0];
@@ -1040,16 +1062,20 @@ int startupMain(int argc, char **argv) {
       }
       if (ax > 0) {
          string cwd = arg0.substr(0, ax);
-         logfile << cwd << endl;
          chdir(cwd.c_str());
       }
    }
+   char *noConsoleFlag = getenv("NOCONSOLE");
+   if (noConsoleFlag != NULL && startsWith(string(noConsoleFlag), "t")) {
+      return Main(argc, argv);
+   }
+   scanOptions();
    initPipe();
    ConsoleStreambuf cbuf;
    cin.rdbuf(&cbuf);
    cout.rdbuf(&cbuf);
-   char *font = getenv("CPPFONT");
-   if (font != NULL) setConsoleFont(string(font));
+   string font = getOption("CPPFONT");
+   if (font != "") setConsoleFont(font);
    return Main(argc, argv);
 }
 

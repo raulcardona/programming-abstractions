@@ -58,7 +58,7 @@ bool operator!=(const GPoint & p1, const GPoint & p2) {
 
 int hashCode(const GPoint & pt) {
    int hash = 0;
-   for (int i = 0; i < sizeof(double) / sizeof(int); i++) {
+   for (size_t i = 0; i < sizeof(double) / sizeof(int); i++) {
       hash ^= ((int *) &pt.x)[i] ^ ((int *) &pt.y)[i];
    }
    return HASH_MASK & hash;
@@ -108,7 +108,7 @@ bool operator!=(const GDimension & d1, const GDimension & d2) {
 
 int hashCode(const GDimension & dim) {
    int hash = 0;
-   for (int i = 0; i < sizeof(double) / sizeof(int); i++) {
+   for (size_t i = 0; i < sizeof(double) / sizeof(int); i++) {
       hash ^= ((int *) &dim.width)[i] ^ ((int *) &dim.height)[i];
    }
    return HASH_MASK & hash;
@@ -188,7 +188,7 @@ bool operator!=(const GRectangle & r1, const GRectangle & r2) {
 
 int hashCode(const GRectangle & r) {
    int hash = 0;
-   for (int i = 0; i < sizeof(double) / sizeof(int); i++) {
+   for (size_t i = 0; i < sizeof(double) / sizeof(int); i++) {
       hash ^= ((int *) &r.x)[i] ^ ((int *) &r.y)[i];
       hash ^= ((int *) &r.width)[i] ^ ((int *) &r.height)[i];
    }

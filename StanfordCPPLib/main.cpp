@@ -7,7 +7,7 @@
  * supply one.
  */
 
-int Main(int argc, char *argv[]) {
+int Main(int, char *[]) {
    extern int Main();
    return Main();
 }

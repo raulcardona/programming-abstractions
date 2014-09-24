@@ -5,6 +5,7 @@
  */
 
 #include <cctype>
+#include <iomanip>
 #include <iostream>
 #include <sstream>
 #include "error.h"
@@ -172,19 +173,22 @@ void readQuotedString(istream & is, string & str) {
          if (ch == '\\') {
             if (!is.get(ch)) error("Unterminated string");
             if (isdigit(ch) || ch == 'x') {
+               int maxDigits = 3;
                int base = 8;
-               if (ch == 'x') base = 16;
+               if (ch == 'x') {
+                  base = 16;
+                  maxDigits = 2;
+               }
                int result = 0;
                int digit = 0;
-               while (ch != delim) {
+               for (int i = 0; i < maxDigits && ch != delim; i++) {
                   if (isdigit(ch)) {
                      digit = ch - '0';
-                  } else if (isalpha(ch)) {
+                  } else if (base == 16 && isxdigit(ch)) {
                      digit = toupper(ch) - 'A' + 10;
                   } else {
-                     digit = base;
+                     break;
                   }
-                  if (digit >= base) break;
                   result = base * result + digit;
                   if (!is.get(ch)) error("Unterminated string");
                }
@@ -233,14 +237,13 @@ void writeQuotedString(ostream & os, const string & str, bool forceQuotes) {
        case '\r': os << "\\r"; break;
        case '\t': os << "\\t"; break;
        case '\v': os << "\\v"; break;
-       case '"': os << oct << "\\" << (int(ch) & 0xFF); break;
        case '\\': os << "\\\\"; break;
        default:
-         if (isprint(ch)) {
+         if (isprint(ch) && ch != '"') {
             os << ch;
          } else {
             ostringstream oss;
-            oss << oct << (int(ch) & 0xFF);
+            oss << oct << setw(3) << setfill('0') << (int(ch) & 0xFF);
             os << "\\" << oss.str();
          }
       }

@@ -78,6 +78,7 @@ void GWindow::initGWindow(double width, double height, bool visible) {
    pp->createGWindow(*this, width, height, gwd->top);
    setColor("BLACK");
    setVisible(visible);
+   pause(1000); // Temporary fix for race condition in back-end.
 }
 
 GWindow::~GWindow() {
