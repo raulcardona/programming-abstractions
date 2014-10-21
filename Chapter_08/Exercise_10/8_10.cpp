@@ -17,7 +17,7 @@ string generatePermutations(Vector<string> keyPresses, Vector<char> output, int 
 
 
 int main () {
-	cout << listMnemonics("26795") << endl;
+	cout << listMnemonics("2345") << endl;
 	return 0;
 }
 
@@ -58,10 +58,10 @@ string generatePermutations(Vector<string> keyPresses, Vector<char> output, int 
 void fillKeypad(Vector<string> &keypad) {
 	keypad.add("0"); // pos 0
 	keypad.add("1"); // pos 1
-	keypad.add("ABC"); // ABC begins at button "2" on a keypad
-	keypad.add("DEF");
-	keypad.add("GHI");
-	keypad.add("JKL");
+	keypad.add("012345"); // ABC begins at button "2" on a keypad
+	keypad.add("012345");
+	keypad.add("012345");
+	keypad.add("012345");
 	keypad.add("MNO");
 	keypad.add("PQRS");
 	keypad.add("TUV");
