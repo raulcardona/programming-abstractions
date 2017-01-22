@@ -1,5 +1,4 @@
-// Credit for the idea to use a vector for the output variable : http://www.geeksforgeeks.org/find-possible-words-phone-digits/ 
-// I was using a string and just couldn't get it to work.  
+//I think this is a simpler code for solving this dial pad problem 
 
 #include <iostream>
 #include <string>
@@ -7,72 +6,44 @@
 #include "vector.h"
 #include "set.h"
 #include "strlib.h"
+Set<string> newFunction(string str, int index);
+string returnMnemonicString(char ch);
 
-using namespace std;
-
-string listMnemonics(string str);
-void fillKeypad(Vector<string> &keypad);
-void fillKeyPresses(Vector<string> keypad, Vector<string> &keyPresses, string str);
-string generatePermutations(Vector<string> keyPresses, Vector<char> output, int index = 0);
-
-
-int main () {
-	cout << listMnemonics("2345") << endl;
-	return 0;
+int main(){
+    string str = getLine("Enter a word: ");
+   for(string s :newFunction(str, 0)){
+      cout << s << " ";
+   }
+return 0;
 }
 
-string listMnemonics(string str) {
-	string result;
-	Vector<string> keypad;
-	Vector<string> keyPresses;
-	fillKeypad(keypad);
-	fillKeyPresses(keypad, keyPresses, str);
-	Vector<char> output(keyPresses.size());
-	result = generatePermutations(keyPresses, output);
-	return result;
+Set<string> newFunction(string str, int index){
+  Set<string> result;
+  if(index == str.length()){
+      result+= "";
+  }else{
+      string stri = returnMnemonicString(str[index]);
+      for(int i = 0; i < stri.length(); i++){
+          char ch = stri[i];
+          for(string s:newFunction(str, index+1)){
+          result += ch+s;
+          }
+      }
+  }
+return result;
 }
 
-string generatePermutations(Vector<string> keyPresses, Vector<char> output, int index) {
-	string result;
-	if (index == keyPresses.size()) {
-		string str;
-		for (int i = 0; i < output.size(); i++) {
-			str += output[i];
-		}
-		return str;
-	}
-
-	for (int i = 0; i < keyPresses.get(index)[i]; i++) {
-		output[index] = keyPresses.get(index)[i];
-		result += generatePermutations(keyPresses, output, index + 1) + " ";
-		if (keyPresses.get(index) == "0") {
-			return "0";
-		} else if (keyPresses.get(index) == "1") {
-			return "1";
-		}
-	}
-	return result;
-
+string returnMnemonicString(char ch){
+    switch(ch){
+    case '2': return "ABC"; break;
+    case '3': return "DEF"; break;
+    case '4': return "GHI";  break;
+    case '5': return "JKL"; break;
+    case '6': return "MNO"; break;
+    case '7': return "PQRS"; break;
+    case '8': return "TUV"; break;
+    case '9': return "WXYZ"; break;
+   }
+return 0;
 }
 
-void fillKeypad(Vector<string> &keypad) {
-	keypad.add("0"); // pos 0
-	keypad.add("1"); // pos 1
-	keypad.add("012345"); // ABC begins at button "2" on a keypad
-	keypad.add("012345");
-	keypad.add("012345");
-	keypad.add("012345");
-	keypad.add("MNO");
-	keypad.add("PQRS");
-	keypad.add("TUV");
-	keypad.add("WXYZ");
-}
-
-// Take strings from keypad and move them into keyPresses in order.
-void fillKeyPresses(Vector<string> keypad, Vector<string> &keyPresses, string str) {
-	for (int i = 0; i < str.length(); i++) {
-		char currentChar = str[i];
-		int currentNumber = currentChar - '0';
-		keyPresses.add(keypad.get(currentNumber));
-	}
-}
